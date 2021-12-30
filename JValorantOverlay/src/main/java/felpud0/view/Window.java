@@ -91,6 +91,9 @@ public class Window {
 		frame = new JFrame();
 		frame.setBounds(0, 0, 545, 145);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ImageIcon img = new ImageIcon(SetupWin.class.getResource("/rsc/valIcon.png"));
+		frame.setIconImage(img.getImage());
+		frame.setTitle("");
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 10, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -239,6 +242,8 @@ public class Window {
 			e.printStackTrace();
 		}
 		rellenarValues();
+		frame.setTitle("Details for: "+cs.getName()+"#"+cs.getTag());
+
 		
 
 		

@@ -37,10 +37,12 @@ import felpud0.valorantAPI.ValorantGetter;
 
 import javax.swing.border.MatteBorder;
 import java.awt.Color;
+import java.awt.Window.Type;
+import javax.swing.ImageIcon;
 
 public class SetupWin implements ActionListener {
 
-	private JFrame frame;
+	private JFrame frmValorantoverlay;
 	private JTextField nickTF;
 	private JTextField tagTF;
 	private JTextField nameTagTF;
@@ -59,7 +61,7 @@ public class SetupWin implements ActionListener {
 			public void run() {
 				try {
 					SetupWin window = new SetupWin();
-					window.frame.setVisible(true);
+					window.frmValorantoverlay.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -85,14 +87,19 @@ public class SetupWin implements ActionListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}		
-		frame = new JFrame();
-		frame.setBounds(100, 100, 481, 234);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmValorantoverlay = new JFrame();
+		frmValorantoverlay.setResizable(false);
+		frmValorantoverlay.setType(Type.POPUP);
+		frmValorantoverlay.setTitle("ValorantOverlay");
+		frmValorantoverlay.setBounds(100, 100, 481, 234);
+		frmValorantoverlay.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ImageIcon img = new ImageIcon(SetupWin.class.getResource("/rsc/valIcon.png"));
+		frmValorantoverlay.setIconImage(img.getImage());
 		
 
 		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		frmValorantoverlay.getContentPane().add(panel, BorderLayout.CENTER);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] {10, 0, 0, 10};
 		gbl_panel.rowHeights = new int[] {5, 0, 5};
@@ -222,7 +229,7 @@ public class SetupWin implements ActionListener {
 		
 		
 		JPanel panel_4 = new JPanel();
-		frame.getContentPane().add(panel_4, BorderLayout.SOUTH);
+		frmValorantoverlay.getContentPane().add(panel_4, BorderLayout.SOUTH);
 		GridBagLayout gbl_panel_4 = new GridBagLayout();
 		gbl_panel_4.rowHeights = new int[]{0, 5};
 		gbl_panel_4.columnWeights = new double[]{0.0};
@@ -244,7 +251,7 @@ public class SetupWin implements ActionListener {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		frame.getContentPane().add(panel_1, BorderLayout.NORTH);
+		frmValorantoverlay.getContentPane().add(panel_1, BorderLayout.NORTH);
 		
 		JLabel lblNewLabel_1 = new JLabel("Enter your profile!");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -262,21 +269,21 @@ public class SetupWin implements ActionListener {
 		
 		if (vg==null) {
 			//TODO: Alerta, mal formateado
-			JOptionPane.showMessageDialog(frame, "Bad formated nametag.","Format Error",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frmValorantoverlay, "Bad formated nametag.","Format Error",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
 		CuentaStandard cs = Controller.getController().accountInfo();
 		if (cs==null) {
 			//TODO: Alerta, jugador no encontrado.
-			JOptionPane.showMessageDialog(frame, "The player: " + vg.getNameTag() + " wasn't found.","Player not found.",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(frmValorantoverlay, "The player: " + vg.getNameTag() + " wasn't found.","Player not found.",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
 		//TODO: Todo bien, sigamos haciendo cosas.
 		goButton.setText("Please wait...");
 		Window.main(null);
-		frame.dispose();
+		frmValorantoverlay.dispose();
 		
 	}
 
