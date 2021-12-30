@@ -6,13 +6,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.Normalizer;
 import java.util.ArrayList;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+
 
 public class ValorantGetter {
 	
@@ -34,6 +36,27 @@ public class ValorantGetter {
 		this(nick, tag, REGION_DEFAULT);
 	}
 	
+	public static ValorantGetter buildValorantGetter(String name, String tag, String region) {
+		return new ValorantGetter(name,tag,region);
+	}
+	
+	public static ValorantGetter buildValorantGetter(String nametag, String region) {
+		
+		Pattern p = Pattern.compile("(?<name>.+)#(?<tag>.{3,5})$");
+		Matcher ma = p.matcher(nametag);
+		
+		if (!ma.find()) {
+			//m.reply("Name:"+nametag+" haven't a correct format").queue();
+			return null;
+		}
+		String name=ma.group("name");
+		String tag=ma.group("tag");
+		return buildValorantGetter(name, tag, region);
+	}
+	
+	public static ValorantGetter buildValorantGetter(String nametag) {	
+		return buildValorantGetter(nametag, REGION_DEFAULT);
+	}
 	public String getNameTag() {
 		return nick+"#"+tag;
 	}
@@ -80,6 +103,8 @@ public class ValorantGetter {
 		try {
 			url = new URL (s);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			conn.addRequestProperty("User-Agent", 
+					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			InputStream is =conn.getInputStream();
 			String encoding = conn.getContentEncoding();
 			encoding = encoding == null ? "UTF-8" : encoding;
@@ -127,8 +152,13 @@ public class ValorantGetter {
 	}
 
 	
-	public HistorialPartidas getHistorialPartidas() {
-		JsonNode arbol = getJSON("/valorant/v3/matches/"+region+"/"+nick+"/"+tag);
+	public HistorialPartidas getHistorialPartidas(String...filtro) {
+		
+		String opt;
+		if (filtro.length>0) {
+			opt="?filter="+filtro[0];
+		}else opt="";
+		JsonNode arbol = getJSON("/valorant/v3/matches/"+region+"/"+nick+"/"+tag+opt);
 		if (arbol==null) return null;	
 		
 		if (arbol.get("status").asInt()!=200) return null;
@@ -141,6 +171,24 @@ public class ValorantGetter {
 		
 		return new HistorialPartidas(arbol.get("puuid").asText(), historial);
 	}
+	
+	public int[] getHistorialMMR() {
+		
+		JsonNode arbol = getJSON("/valorant/v1/mmr-history/"+region+"/"+nick+"/"+tag);
+		
+		if (arbol==null) return null;	
+		if (arbol.get("status").asInt()!=200) return null;
+		ArrayNode a = (ArrayNode) arbol.get("data");
+		int[] ret = new int[6];
+		int i=0;
+		for(JsonNode n : a) {
+			ret[i]=n.get("mmr_change_to_last_game").asInt();
+			i++;
+		}
+		
+		return ret;
+	}
+	
 	
 	
 
