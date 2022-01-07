@@ -95,8 +95,7 @@ public class SetupWin implements ActionListener {
 		frmValorantoverlay.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ImageIcon img = new ImageIcon(SetupWin.class.getResource("/rsc/valIcon.png"));
 		frmValorantoverlay.setIconImage(img.getImage());
-		
-
+	
 		
 		JPanel panel = new JPanel();
 		frmValorantoverlay.getContentPane().add(panel, BorderLayout.CENTER);

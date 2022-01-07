@@ -120,7 +120,7 @@ public class ValorantGetter {
 	
 	public CuentaStandard getAccountData() {
 		
-		JsonNode arbol = getJSON("/valorant/v1/account/"+nick+"/"+tag);
+		JsonNode arbol = getJSON("/valorant/v1/account/"+nick+"/"+tag+"?force=true");
 		if (arbol==null) return null; //E
 		
 		if (arbol.get("status").asInt()!=200) return null;
@@ -136,7 +136,7 @@ public class ValorantGetter {
 	}
 	
 	public CuentaMMR getMMR() {
-		JsonNode arbol = getJSON("/valorant/v2/mmr/"+region+"/"+nick+"/"+tag);
+		JsonNode arbol = getJSON("/valorant/v2/mmr/"+region+"/"+nick+"/"+tag+"?force=true");
 		if (arbol==null || arbol.isMissingNode()) return null;
 		
 		if (arbol.get("status").asInt()!=200) return null;
