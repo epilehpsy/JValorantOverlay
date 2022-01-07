@@ -3,19 +3,30 @@ package felpud0.valorantAPI;
 public class CuentaMMR extends Cuenta implements Comparable<CuentaMMR> {
 	
 	public static String[] fotosRango = {
-			"none",
+			
+			"https://goldenhorsegaming.com/wp-content/uploads/2021/06/unranked.png",
+			//3 Iron 1
 			"https://static.wikia.nocookie.net/valorant/images/7/7f/TX_CompetitiveTier_Large_3.png/",
+			//4 Iron 2
 			"https://static.wikia.nocookie.net/valorant/images/2/28/TX_CompetitiveTier_Large_4.png",
+			//5 Iron 3
 			"https://static.wikia.nocookie.net/valorant/images/b/b8/TX_CompetitiveTier_Large_5.png/",
+			//6 Bron 1
 			"https://static.wikia.nocookie.net/valorant/images/a/a2/TX_CompetitiveTier_Large_6.png/",
+			//7 Bron 2
 			"https://static.wikia.nocookie.net/valorant/images/e/e7/TX_CompetitiveTier_Large_7.png",
+			//8 Bron 3
 			"https://static.wikia.nocookie.net/valorant/images/a/a8/TX_CompetitiveTier_Large_8.png",
+			//9 Silv 1
 			"https://static.wikia.nocookie.net/valorant/images/0/09/TX_CompetitiveTier_Large_9.png/",
+			//10 Silv 2
 			"https://static.wikia.nocookie.net/valorant/images/c/ca/TX_CompetitiveTier_Large_10.png/",
 			"https://static.wikia.nocookie.net/valorant/images/1/1e/TX_CompetitiveTier_Large_11.png/",
-			"https://static.wikia.nocookie.net/valorant/images/9/91/TX_CompetitiveTier_Large_12.png/",
+			//12 Gold1
+			"https://static.wikia.nocookie.net/valorant/images/9/91/TX_CompetitiveTier_Large_12.png/", 
 			"https://static.wikia.nocookie.net/valorant/images/4/45/TX_CompetitiveTier_Large_13.png/",
 			"https://static.wikia.nocookie.net/valorant/images/c/c0/TX_CompetitiveTier_Large_14.png/",
+			//15 Plat1
 			"https://static.wikia.nocookie.net/valorant/images/d/d3/TX_CompetitiveTier_Large_15.png/",
 			"https://static.wikia.nocookie.net/valorant/images/a/a5/TX_CompetitiveTier_Large_16.png/",
 			"https://static.wikia.nocookie.net/valorant/images/f/f2/TX_CompetitiveTier_Large_17.png/",
@@ -65,7 +76,14 @@ public class CuentaMMR extends Cuenta implements Comparable<CuentaMMR> {
 	}
 	
 	public String getRankImg() {
-		return fotosRango[currentTier-3];
+		int idx;
+		if (currentTier < 2) {
+			idx=0; 
+		}
+		else {
+			idx=currentTier-2;
+		}
+		return fotosRango[idx];
 	}
 
 	@Override

@@ -13,6 +13,8 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.text.AttributeSet.ColorAttribute;
 
 import felpud0.controller.Controller;
 import felpud0.valorantAPI.CuentaMMR;
@@ -33,6 +35,7 @@ import javax.swing.JList;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JTable;
 
 public class Window {
@@ -210,6 +213,27 @@ public class Window {
         
         
         table = new JTable(new String[3][2], new String[] {"ganada?","ptos"});
+        table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+        	
+        	@Override
+        	public java.awt.Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+            {
+                final java.awt.Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                Color cbackg;
+                Color ctexto;
+
+                if (table.getValueAt(row, 0).equals("WON")) {
+                	cbackg = Color.GREEN;
+                	ctexto = Color.BLACK;
+                }else {
+                	cbackg = Color.RED;
+                	ctexto = Color.WHITE;
+                }
+                c.setBackground(cbackg);
+                c.setForeground(ctexto);
+                return c;        		
+        	}
+        });
         table.setIntercellSpacing(new Dimension(0, 0));
         table.setFont(new Font("Tahoma", Font.BOLD, 11));
         GridBagConstraints gbc_table = new GridBagConstraints();
@@ -265,6 +289,7 @@ public class Window {
 				//val[i][0] = "LOSE";
 				
 			}
+		
 			i++;
 			if (i==3) break;
 		}
