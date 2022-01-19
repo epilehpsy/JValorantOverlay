@@ -46,6 +46,7 @@ public class Window {
     JLabel LLevel;
     private JTable table;
     private JLabel lblNewLabel_1;
+	private final static int MAX_HIST_ROWS = 5;
 
 
 	/**
@@ -198,9 +199,9 @@ public class Window {
         panel.add(panel_2, gbc_panel_2);
         GridBagLayout gbl_panel_2 = new GridBagLayout();
         gbl_panel_2.columnWidths = new int[]{46, 0};
-        gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0};
+        gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0};
         gbl_panel_2.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-        gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+        gbl_panel_2.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
         panel_2.setLayout(gbl_panel_2);
         
         lblNewLabel_1 = new JLabel("Last rankeds:");
@@ -208,11 +209,13 @@ public class Window {
         gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
         gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
         gbc_lblNewLabel_1.gridx = 0;
-        gbc_lblNewLabel_1.gridy = 1;
+        gbc_lblNewLabel_1.gridy = 0;
         panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
         
         
-        table = new JTable(new String[3][2], new String[] {"ganada?","ptos"});
+        table = new JTable(new String[MAX_HIST_ROWS][2], new String[] {"ganada?","ptos"});
+        table.setRowHeight(14);
+        table.setRowMargin(0);
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
         	
         	@Override
@@ -240,7 +243,7 @@ public class Window {
         gbc_table.anchor = GridBagConstraints.WEST;
         gbc_table.insets = new Insets(0, 0, 5, 0);
         gbc_table.gridx = 0;
-        gbc_table.gridy = 2;
+        gbc_table.gridy = 1;
         panel_2.add(table, gbc_table);
         
         
@@ -274,7 +277,6 @@ public class Window {
 	}
 	
 	private void rellenarValues() {
-//		String[][] val=  new String[6][2];
 		int[] hist = Controller.getController().getVG().getHistorialMMR();
 		int i = 0;
 		for(int j :hist) {
@@ -291,7 +293,7 @@ public class Window {
 			}
 		
 			i++;
-			if (i==3) break;
+			if (i==MAX_HIST_ROWS) break;
 		}
 
 //		return val;
