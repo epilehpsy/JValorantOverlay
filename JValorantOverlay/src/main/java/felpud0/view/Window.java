@@ -9,7 +9,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JLabel;
 import javax.swing.UIManager;
@@ -249,6 +253,14 @@ public class Window {
         
         if (Controller.getController().isStablish()) {
         	fillAccountInfo();
+        	Runnable helloRunnable = new Runnable() {
+        	    public void run() {
+                	fillAccountInfo();
+        	    }
+        	};
+
+        	ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        	executor.scheduleAtFixedRate(helloRunnable, 0, 90, TimeUnit.SECONDS);
         }
         
 
@@ -269,7 +281,10 @@ public class Window {
 			e.printStackTrace();
 		}
 		rellenarValues();
-		frame.setTitle("Details for: "+cs.getName()+"#"+cs.getTag());
+		LocalDateTime date = LocalDateTime.now();
+		frame.setTitle("Details for: "+cs.getName()+"#"+cs.getTag()+
+				" | Last updt: "+ date.getHour()+":"
+						+ date.getMinute()+ ":" + date.getSecond());
 
 		
 
