@@ -75,6 +75,10 @@ public class SetupWin implements ActionListener {
 	public SetupWin() {
 		initialize();
 	}
+	
+	public void show() {
+		frmValorantoverlay.setVisible(true);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
