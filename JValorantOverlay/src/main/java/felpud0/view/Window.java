@@ -41,6 +41,9 @@ import java.awt.Color;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JTable;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Window {
 
@@ -51,6 +54,7 @@ public class Window {
     private JTable table;
     private JLabel lblNewLabel_1;
 	private final static int MAX_HIST_ROWS = 5;
+	private JButton updateButton;
 
 
 	/**
@@ -201,16 +205,16 @@ public class Window {
         gbc_panel_2.gridy = 0;
         panel.add(panel_2, gbc_panel_2);
         GridBagLayout gbl_panel_2 = new GridBagLayout();
-        gbl_panel_2.columnWidths = new int[]{46, 0};
+        gbl_panel_2.columnWidths = new int[]{46, 0, 0};
         gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0};
-        gbl_panel_2.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+        gbl_panel_2.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
         gbl_panel_2.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
         panel_2.setLayout(gbl_panel_2);
         
         lblNewLabel_1 = new JLabel("Last rankeds:");
         GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
         gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
-        gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+        gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
         gbc_lblNewLabel_1.gridx = 0;
         gbc_lblNewLabel_1.gridy = 0;
         panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
@@ -240,9 +244,25 @@ public class Window {
                 return c;        		
         	}
         });
+      
+        updateButton = new JButton("");
+        updateButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		fillAccountInfo();
+        	}
+        });
+        updateButton.setBorder(null);
+        updateButton.setIcon(new ImageIcon(Window.class.getResource("/rsc/reload.png")));
+        GridBagConstraints gbc_updateButton = new GridBagConstraints();
+        gbc_updateButton.anchor = GridBagConstraints.NORTHEAST;
+        gbc_updateButton.insets = new Insets(0, 0, 5, 0);
+        gbc_updateButton.gridx = 1;
+        gbc_updateButton.gridy = 0;
+        panel_2.add(updateButton, gbc_updateButton);
         table.setIntercellSpacing(new Dimension(0, 0));
         table.setFont(new Font("Tahoma", Font.BOLD, 11));
         GridBagConstraints gbc_table = new GridBagConstraints();
+        gbc_table.gridwidth = 2;
         gbc_table.fill = GridBagConstraints.BOTH;
         gbc_table.insets = new Insets(0, 0, 5, 0);
         gbc_table.gridx = 0;
