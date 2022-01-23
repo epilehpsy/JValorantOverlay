@@ -230,11 +230,11 @@ public class Window {
                 Color ctexto;
 
                 if (table.getValueAt(row, 0).equals("WON")) {
-                	cbackg = Color.GREEN;
+                	cbackg = Color.decode("0xCCFFE5");
                 	ctexto = Color.BLACK;
                 }else {
-                	cbackg = Color.RED;
-                	ctexto = Color.WHITE;
+                	cbackg = Color.decode("0xFFCCCC");
+                	ctexto = Color.BLACK;
                 }
                 c.setBackground(cbackg);
                 c.setForeground(ctexto);
