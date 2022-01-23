@@ -97,15 +97,15 @@ public class Window {
 			e1.printStackTrace();
 		}		
 		frame = new JFrame();
-		frame.setBounds(0, 0, 545, 145);
+		frame.setBounds(0, 0, 545, 120);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ImageIcon img = new ImageIcon(SetupWin.class.getResource("/rsc/valIcon.png"));
 		frame.setIconImage(img.getImage());
 		frame.setTitle("");
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 10, 0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 
@@ -129,28 +129,27 @@ public class Window {
         GridBagConstraints gbc_rankImg = new GridBagConstraints();
         gbc_rankImg.insets = new Insets(0, 0, 0, 5);
         gbc_rankImg.gridx = 0;
-        gbc_rankImg.fill = GridBagConstraints.BOTH;
+        gbc_rankImg.fill = GridBagConstraints.HORIZONTAL;
         gbc_rankImg.gridy = 0;
         frame.getContentPane().add(rankImg, gbc_rankImg);
         
         JPanel panel = new JPanel();
         GridBagConstraints gbc_panel = new GridBagConstraints();
-        gbc_panel.insets = new Insets(0, 0, 0, 5);
-        gbc_panel.fill = GridBagConstraints.BOTH;
+        gbc_panel.fill = GridBagConstraints.HORIZONTAL;
         gbc_panel.gridx = 1;
         gbc_panel.gridy = 0;
         frame.getContentPane().add(panel, gbc_panel);
         GridBagLayout gbl_panel = new GridBagLayout();
-        gbl_panel.rowHeights = new int[]{2, 0};
+        gbl_panel.rowHeights = new int[]{0};
         gbl_panel.columnWeights = new double[]{1.0, 1.0};
-        gbl_panel.rowWeights = new double[]{0.0, 1.0};
+        gbl_panel.rowWeights = new double[]{1.0};
         panel.setLayout(gbl_panel);
         
         JPanel panel_1 = new JPanel();
         GridBagConstraints gbc_panel_1 = new GridBagConstraints();
         gbc_panel_1.insets = new Insets(0, 0, 0, 5);
         gbc_panel_1.gridx = 0;
-        gbc_panel_1.gridy = 1;
+        gbc_panel_1.gridy = 0;
         panel.add(panel_1, gbc_panel_1);
         GridBagLayout gbl_panel_1 = new GridBagLayout();
         gbl_panel_1.columnWidths = new int[]{0, 0, 0};
@@ -197,9 +196,9 @@ public class Window {
         
         JPanel panel_2 = new JPanel();
         GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-        gbc_panel_2.fill = GridBagConstraints.HORIZONTAL;
+        gbc_panel_2.fill = GridBagConstraints.BOTH;
         gbc_panel_2.gridx = 1;
-        gbc_panel_2.gridy = 1;
+        gbc_panel_2.gridy = 0;
         panel.add(panel_2, gbc_panel_2);
         GridBagLayout gbl_panel_2 = new GridBagLayout();
         gbl_panel_2.columnWidths = new int[]{46, 0};
@@ -210,7 +209,7 @@ public class Window {
         
         lblNewLabel_1 = new JLabel("Last rankeds:");
         GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-        gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
+        gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
         gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
         gbc_lblNewLabel_1.gridx = 0;
         gbc_lblNewLabel_1.gridy = 0;
@@ -244,7 +243,7 @@ public class Window {
         table.setIntercellSpacing(new Dimension(0, 0));
         table.setFont(new Font("Tahoma", Font.BOLD, 11));
         GridBagConstraints gbc_table = new GridBagConstraints();
-        gbc_table.anchor = GridBagConstraints.WEST;
+        gbc_table.fill = GridBagConstraints.BOTH;
         gbc_table.insets = new Insets(0, 0, 5, 0);
         gbc_table.gridx = 0;
         gbc_table.gridy = 1;
