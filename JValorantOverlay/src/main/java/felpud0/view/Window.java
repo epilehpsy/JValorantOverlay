@@ -52,9 +52,7 @@ public class Window {
     JLabel rankImg;
     JLabel LLevel;
     private JTable table;
-    private JLabel lblNewLabel_1;
 	private final static int MAX_HIST_ROWS = 5;
-	private JButton updateButton;
 
 
 	/**
@@ -166,7 +164,7 @@ public class Window {
         GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
         gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
         gbc_lblNewLabel.gridwidth = 2;
-        gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
         gbc_lblNewLabel.gridx = 0;
         gbc_lblNewLabel.gridy = 0;
         panel_1.add(lblNewLabel, gbc_lblNewLabel);
@@ -177,7 +175,7 @@ public class Window {
         GridBagConstraints gbc_LRango = new GridBagConstraints();
         gbc_LRango.anchor = GridBagConstraints.WEST;
         gbc_LRango.gridwidth = 2;
-        gbc_LRango.insets = new Insets(0, 0, 5, 5);
+        gbc_LRango.insets = new Insets(0, 0, 5, 0);
         gbc_LRango.gridx = 0;
         gbc_LRango.gridy = 1;
         panel_1.add(LRango, gbc_LRango);
@@ -206,22 +204,14 @@ public class Window {
         panel.add(panel_2, gbc_panel_2);
         GridBagLayout gbl_panel_2 = new GridBagLayout();
         gbl_panel_2.columnWidths = new int[]{46, 0, 0};
-        gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0};
+        gbl_panel_2.rowHeights = new int[]{0, -4, 0};
         gbl_panel_2.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-        gbl_panel_2.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
+        gbl_panel_2.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
         panel_2.setLayout(gbl_panel_2);
-        
-        lblNewLabel_1 = new JLabel("Last rankeds:");
-        GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-        gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
-        gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-        gbc_lblNewLabel_1.gridx = 0;
-        gbc_lblNewLabel_1.gridy = 0;
-        panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
         
         
         table = new JTable(new String[MAX_HIST_ROWS][2], new String[] {"ganada?","ptos"});
-        table.setRowHeight(14);
+        table.setRowHeight(15);
         table.setRowMargin(0);
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
         	
@@ -244,29 +234,14 @@ public class Window {
                 return c;        		
         	}
         });
-      
-        updateButton = new JButton("");
-        updateButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		fillAccountInfo();
-        	}
-        });
-        updateButton.setBorder(null);
-        updateButton.setIcon(new ImageIcon(Window.class.getResource("/rsc/reload.png")));
-        GridBagConstraints gbc_updateButton = new GridBagConstraints();
-        gbc_updateButton.anchor = GridBagConstraints.NORTHEAST;
-        gbc_updateButton.insets = new Insets(0, 0, 5, 0);
-        gbc_updateButton.gridx = 1;
-        gbc_updateButton.gridy = 0;
-        panel_2.add(updateButton, gbc_updateButton);
         table.setIntercellSpacing(new Dimension(0, 0));
-        table.setFont(new Font("Tahoma", Font.BOLD, 11));
+        table.setFont(new Font("Tahoma", Font.BOLD, 15));
         GridBagConstraints gbc_table = new GridBagConstraints();
         gbc_table.gridwidth = 2;
         gbc_table.fill = GridBagConstraints.BOTH;
         gbc_table.insets = new Insets(0, 0, 5, 0);
         gbc_table.gridx = 0;
-        gbc_table.gridy = 1;
+        gbc_table.gridy = 0;
         panel_2.add(table, gbc_table);
         
         
@@ -293,7 +268,7 @@ public class Window {
 		LLevel.setText(cs.getLevel()+"");
 		Image img;
 		try {
-			img = getImageFromUrl(a.getRankImg()).getScaledInstance(frame.getHeight(), frame.getHeight(),  Image.SCALE_SMOOTH);
+			img = getImageFromUrl(a.getRankImg()).getScaledInstance(frame.getHeight()-50, frame.getHeight()-50,  Image.SCALE_SMOOTH);
 			rankImg.setIcon(new ImageIcon(img));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
