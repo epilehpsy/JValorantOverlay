@@ -179,7 +179,7 @@ public class ValorantGetter {
 		if (arbol==null) return null;	
 		if (arbol.get("status").asInt()!=200) return null;
 		ArrayNode a = (ArrayNode) arbol.get("data");
-		int[] ret = new int[6];
+		int[] ret = new int[10];
 		int i=0;
 		for(JsonNode n : a) {
 			ret[i]=n.get("mmr_change_to_last_game").asInt();
