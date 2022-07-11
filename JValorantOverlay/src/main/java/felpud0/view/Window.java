@@ -267,7 +267,7 @@ public class Window {
         	};
 
         	ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        	executor.scheduleAtFixedRate(helloRunnable, 0, 90, TimeUnit.SECONDS);
+        	executor.scheduleAtFixedRate(helloRunnable, 90, 90, TimeUnit.SECONDS);
         }
         
 
