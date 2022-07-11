@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -47,6 +48,7 @@ import java.awt.event.ActionEvent;
 
 public class Window {
 
+	private static final int RANK_OFFSET = 2;
 	private JFrame frame;
 	JLabel LRango;
     JLabel rankImg;
@@ -83,6 +85,14 @@ public class Window {
         URL url;
 		url = new URL(path);
 	    BufferedImage image = ImageIO.read(url);
+	    return image;
+	}
+	
+	private BufferedImage getImageFromFile(String path) throws IOException{
+		
+		File f;
+		f = new File(path);
+		BufferedImage image = ImageIO.read(f);
 	    return image;
 	}
 	
@@ -211,6 +221,9 @@ public class Window {
         
         
         table = new JTable(new String[MAX_HIST_ROWS][2], new String[] {"ganada?","ptos"});
+        table.setRowSelectionAllowed(false);
+        table.setShowGrid(false);
+        table.setEnabled(false);
         table.setRowHeight(15);
         table.setRowMargin(0);
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
@@ -266,14 +279,11 @@ public class Window {
 		CuentaStandard cs = Controller.getController().accountInfo();
 		LRango.setText(a.getCurrentTierPatch()+" "+a.getRankInTier()+"pts");
 		LLevel.setText(cs.getLevel()+"");
-		Image img;
-		try {
-			img = getImageFromUrl(a.getRankImg()).getScaledInstance(frame.getHeight()-50, frame.getHeight()-50,  Image.SCALE_SMOOTH);
-			rankImg.setIcon(new ImageIcon(img));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		String imgPath = "/rsc/rank"+(a.getCurrentTier()-RANK_OFFSET)+".png";
+		ImageIcon img =  new ImageIcon(Window.class.getResource(imgPath));
+		rankImg.setIcon(img);
+
 		rellenarValues();
 		LocalDateTime date = LocalDateTime.now();
 		frame.setTitle("Details for: "+cs.getName()+"#"+cs.getTag()+
